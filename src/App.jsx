@@ -6,7 +6,7 @@ function App() {
     const dispatch = useDispatch();
 
     // Чтобы получить состояние
-    const cash = useSelector((state) => state.cash);
+    const cash = useSelector((state) => state.cash.cash); //сюда передаем имя редьюсера.имя переменной
 
     console.log(cash);
 
