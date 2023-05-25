@@ -2,12 +2,16 @@ const defaultState = {
     customer: [],
 };
 
+//хорошим правилом является выносить экшены в константы и в редбюсерах в кейсах использовать константы (если вдруг что-то неправильно, среда разработки поджскажет)
+const ADD_CUSTOMER = "ADD_CUSTOMER";
+const REMOVE_CUSTOMER = "REMOVE_CUSTOMER";
+
 // Добавление клиентов с писок и для получения всех клиентов
 export const customerReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case "ADD_CUSTOMER":
+        case ADD_CUSTOMER:
             return { ...state, customer: [...state.customer, action.payload] };
-        case "REMOVE_CUSTOMER":
+        case REMOVE_CUSTOMER:
             return {
                 ...state,
                 customer: state.customer.filter(
@@ -19,3 +23,10 @@ export const customerReducer = (state = defaultState, action) => {
             return state;
     }
 };
+
+//ФУНКЦИЯ ACTION Creator - вернет объект с типом экшна и данные которые передаются параметры
+export const addCustomerAction = (payload) => ({ type: ADD_CUSTOMER, payload });
+export const removeCustomerAction = (payload) => ({
+    type: REMOVE_CUSTOMER,
+    payload,
+});

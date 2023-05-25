@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
+import {
+    addCustomerAction,
+    removeCustomerAction,
+} from "./store/customerReducer";
 
 function App() {
     //чтобы изменить состояние
@@ -24,11 +28,11 @@ function App() {
             name,
             id: Date.now(),
         };
-        dispatch({ type: "ADD_CUSTOMER", payload: customer });
+        dispatch(addCustomerAction(customer));
     };
 
     const removeCustomer = (customer) => {
-        dispatch({ type: "REMOVE_CUSTOMER", payload: customer.id });
+        dispatch(removeCustomerAction(customer.id));
     };
 
     return (
@@ -44,9 +48,9 @@ function App() {
                 <button onClick={() => addCustomer(prompt())}>
                     Добавить клиента
                 </button>
-                <button onClick={() => getCash(Number(prompt()))}>
+                {/* <button onClick={() => getCash(Number(prompt()))}>
                     Удалить клиента
-                </button>
+                </button> */}
             </div>
             {customers.length > 0 ? (
                 <div>
