@@ -4,6 +4,7 @@ import {
     addCustomerAction,
     removeCustomerAction,
 } from "./store/customerReducer";
+import { fetchCustomers } from "./asyncAction/customers";
 
 function App() {
     //чтобы изменить состояние
@@ -48,9 +49,9 @@ function App() {
                 <button onClick={() => addCustomer(prompt())}>
                     Добавить клиента
                 </button>
-                {/* <button onClick={() => getCash(Number(prompt()))}>
-                    Удалить клиента
-                </button> */}
+                <button onClick={() => dispatch(fetchCustomers())}>
+                    Получить клиентов из бэкенда
+                </button>
             </div>
             {customers.length > 0 ? (
                 <div>

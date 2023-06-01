@@ -1,6 +1,7 @@
-import { createStore, combineReducers } from "redux"; //комбинируем редьюсеры для передачи в стор
+import { createStore, combineReducers, applyMiddleware } from "redux"; //комбинируем редьюсеры для передачи в стор
 import { cashReducer } from "./cashReducer";
 import { customerReducer } from "./customerReducer";
+import thunk from "redux-thunk";
 
 //корневой редьюсер объединяющий оба редьюсера
 const rootReducer = combineReducers({
@@ -14,4 +15,7 @@ const rootReducer = combineReducers({
 const devToolRedux = window._REDUX_DEVTOOLS_EXTENSION_
     ? window.__REDUX_DEVTOOLS_EXTENSION__()
     : (f) => f;
-export const store = createStore(rootReducer, devToolRedux); // передали оба редьюсера в стор
+export const store = createStore(
+    rootReducer, // передали оба редьюсера в стор
+    devToolRedux(applyMiddleware(thunk)) // middleware который позволяет внутри сторонних функций использовать dispatch
+);
